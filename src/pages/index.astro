@@ -1,20 +1,20 @@
 ---
+import Footer from "../components/Footer.astro";
+import Navigation from "../components/Navigation.astro";
 ---
 
 <html lang="de">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<div class="flex gap-2">
-            <a href="/">Home</a>
-			<a href="/blog">Blog</a>
-            <a href="/about">About</a>
-        </div>
-		<h1 class="text-xl font-semibold text-red-500">Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <Navigation />
+    <h1 class="text-xl font-semibold text-red-500">Astro</h1>
+
+    <Footer />
+  </body>
 </html>
