@@ -1,6 +1,6 @@
 ---
 import Footer from "../components/Footer.astro";
-import Navigation from "../components/Navigation.astro";
+import Header from "../components/Header.astro";
 
 const pageTitle = "About me";
 
@@ -26,8 +26,8 @@ const goal = 3;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Navigation />
-    <h1 class="text-xl font-semibold text-red-500">{pageTitle}</h1>
+    <Header />
+    <h1 class="text-xl font-semibold text-primary">{pageTitle}</h1>
     <p>This is my first astro site...</p>
     <p>
       ...at the moment i have duplicated the whole HTML stuff from index.astro
