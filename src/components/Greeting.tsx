@@ -11,8 +11,8 @@ export const Greeting = ({ messages }: Props) => {
         return newMessage;
     }
   };
-
-  const [greeting, setGreeting] = useState(randomMessage());
+  const todaysMessage = messages[new Date().getDay() % messages.length];
+  const [greeting, setGreeting] = useState(todaysMessage);
 
   return (
     <div>
