@@ -1,0 +1,48 @@
+---
+import TeaserItem from "@components/TeaserItem.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import type { MarkdownInstance } from "astro";
+import { stringToHsl } from "src/lib/color-hash";
+
+export async function getStaticPaths() {
+  const allPosts = await Astro.glob("../posts/*.md");
+  const uniqueTags = [
+    ...new Set(allPosts.map((p) => p.frontmatter.tags).flat()),
+  ];
+  console.log({ _: "[tag]", uniqueTags });
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.frontmatter.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+interface Props {
+  posts: MarkdownInstance<Record<string, any>>[];
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+const { h, s, l } = stringToHsl(tag ?? "");
+---
+
+<BaseLayout pageTitle={tag}>
+  <p>
+    Posts tagged with <span
+      class="text-white text-[0.625rem] px-3 py-0.5 rounded-full no-underline"
+      style={`background: hsl(${h} ${s}% ${l}%)`}>{tag}</span
+    >
+  </p>
+  <ul>
+    {
+      posts.map((post) => (
+        <TeaserItem title={post.frontmatter.title} url={post.url} />
+      ))
+    }
+  </ul>
+</BaseLayout>

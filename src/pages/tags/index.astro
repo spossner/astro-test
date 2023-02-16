@@ -1,0 +1,15 @@
+---
+import TeaserItem from "@components/TeaserItem.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+const allPosts = await Astro.glob("../posts/*.md");
+const uniqueTags = [...new Set(allPosts.map((p) => p.frontmatter.tags).flat())];
+---
+
+<BaseLayout pageTitle="Posts by tags">
+  <div class="flex justify-start">
+    <ul>
+      {uniqueTags.map((tag) => <TeaserItem title={tag} url={`/tags/${tag}`} />)}
+    </ul>
+  </div>
+</BaseLayout>

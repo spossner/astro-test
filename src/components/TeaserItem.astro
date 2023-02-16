@@ -1,0 +1,13 @@
+---
+interface Props {
+  url?: string;
+  title: string;
+}
+const { url = "/", title } = Astro.props;
+---
+
+<li class="hover:bg-primary hover:text-white rounded px-4 py-2">
+  <a href={url} class="font-semibold">
+    {title}
+  </a>
+</li>

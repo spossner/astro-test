@@ -1,0 +1,44 @@
+---
+import { stringToHsl } from "src/lib/color-hash";
+import BaseLayout from "./BaseLayout.astro";
+
+const { frontmatter } = Astro.props;
+const pubDate = new Date(frontmatter.pubDate).toLocaleDateString("de-DE");
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+  <article class="prose xl:prose-xl prose-p:text-justify">
+    <div class="flex justify-between mb-8">
+      <div>
+        <div class="text-slate-700 text-sm font-serif italic">{pubDate}</div>
+        <div class="">{frontmatter.description}</div>
+        <div class="text-slate-700 font-serif italic">
+          {frontmatter.author}
+        </div>
+        <div class="flex gap-1">
+          {
+            (frontmatter.tags as string[]).map((tag) => {
+              const { h, s, l, t } = stringToHsl(tag);
+              return (
+                <a
+                  href={`/tags/${tag}`}
+                  class="text-[0.625rem] px-3 py-0.5 rounded-full no-underline"
+                  style={`color: ${t}; background: hsl(${h} ${s}% ${l}%)`}
+                >
+                  {tag}
+                </a>
+              );
+            })
+          }
+        </div>
+      </div>
+      <img
+        src={frontmatter.image.url}
+        width="300"
+        alt={frontmatter.image.alt}
+        class="m-0"
+      />
+    </div>
+    <slot />
+  </article>
+</BaseLayout>
