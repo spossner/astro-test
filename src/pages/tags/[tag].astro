@@ -28,14 +28,14 @@ interface Props {
 
 const { tag } = Astro.params;
 const { posts } = Astro.props;
-const { h, s, l } = stringToHsl(tag ?? "");
+const { h, s, l, t } = stringToHsl(tag ?? "");
 ---
 
 <BaseLayout pageTitle={tag}>
   <p>
     Posts tagged with <span
-      class="text-white text-[0.625rem] px-3 py-0.5 rounded-full no-underline"
-      style={`background: hsl(${h} ${s}% ${l}%)`}>{tag}</span
+      class="text-[0.625rem] px-3 py-0.5 rounded-full no-underline"
+      style={`color: ${t}; background: hsl(${h} ${s}% ${l}%)`}>{tag}</span
     >
   </p>
   <ul>
